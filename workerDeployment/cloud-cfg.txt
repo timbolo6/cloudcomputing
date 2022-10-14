@@ -9,7 +9,6 @@ packages:
  - build-essential
 
 runcmd:
- - pip3 install flask
  - pip3 install celery
  
  - git clone https://github.com/timbolo6/cloudcomputing.git
