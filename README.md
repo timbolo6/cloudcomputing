@@ -5,6 +5,12 @@
 sudo apt-get install rabbitmq-server
 ### start server
 sudo rabbitmq-server
+---
+rabbitmqctl add_user test test
+rabbitmqctl set_user_tags test administrator
+rabbitmqctl set_permissions -p / test ".*" ".*" ".*"
+---
+
 ### start monitoring flower
 celery -A proj flower
 
