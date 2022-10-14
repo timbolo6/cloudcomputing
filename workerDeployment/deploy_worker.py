@@ -57,8 +57,8 @@ print("waiting for 10 seconds.. ")
 time.sleep(10)
 
 while inst_status == 'BUILD':
-    print("Instance: "+instance.name+" is in "+inst_status+" state, sleeping for 5 seconds more...")
-    time.sleep(5)
+    print("Instance: "+instance.name+" is in "+inst_status+" state, sleeping for 10 seconds more...")
+    time.sleep(10)
     instance = nova.servers.get(instance.id)
     inst_status = instance.status
 
