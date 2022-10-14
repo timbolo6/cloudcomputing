@@ -1,4 +1,5 @@
 #cloud-config
+
 apt_update: true
 apt_upgrade: true
 
@@ -8,7 +9,6 @@ packages:
 
 runcmd:
  - pip3 install celery
- - pip3 install re
  - git clone https://github.com/timbolo6/cloudcomputing.git
  - celery --workdir=/cloudcomputing/workerDeployment/ -A proj worker --detach --loglevel=INFO  -n worker@%h 
  
