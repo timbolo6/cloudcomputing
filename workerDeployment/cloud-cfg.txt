@@ -8,7 +8,7 @@ packages:
 
 runcmd:
  - pip3 install celery
- - pip2 install re
+ - pip3 install re
  - git clone https://github.com/timbolo6/cloudcomputing.git
  - celery --workdir=/cloudcomputing/workerDeployment/ -A proj worker --detach --loglevel=INFO  -n worker@%h 
  

@@ -1,5 +1,5 @@
 # http://docs.openstack.org/developer/python-novaclient/ref/v2/servers.html
-import time, os, sys
+import time, os, sys, random
 import inspect
 from os import environ as env
 
@@ -10,10 +10,11 @@ from keystoneauth1 import session
 
 # TODO: some these need to be filled in for the script to work...
 flavor = "ssc.small"
-private_net = None
+private_net = "UPPMAX 2022/1-3 Internal IPv4 Network"
 floating_ip_pool_name = None
 floating_ip = None
 image_name = "Ubuntu 20.04 - 2021.03.23"
+identifier = random.randint(1000,9999)
 
 loader = loading.get_plugin_loader('password')
 
