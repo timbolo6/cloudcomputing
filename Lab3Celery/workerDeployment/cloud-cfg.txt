@@ -12,5 +12,5 @@ runcmd:
  - pip3 install celery
  
  - git clone https://github.com/timbolo6/cloudcomputing.git
- - celery --workdir=/cloudcomputing/workerDeployment/ -A proj worker --detach --loglevel=INFO  -n worker@%h 
+ - celery --workdir=/cloudcomputing/Lab3Celery/workerDeployment/ -A proj worker --detach --loglevel=INFO  -n worker@%h 
  
