@@ -1,0 +1,38 @@
+version: "3"
+services:
+  rabbit:
+    hostname: rabbit
+    image: rabbitmq:management
+    environment:
+      - RABBITMQ_DEFAULT_USER=rabbitmq
+      - RABBITMQ_DEFAULT_PASS=rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ..:/home/fenics/shared
+  worker_1:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    hostname: worker_1
+    working_dir: /home/fenics/shared/mini_project_celery
+    entrypoint: celery
+    command: -A proj.celery worker --loglevel=debug -n worker1@%h
+    volumes:
+      - ..:/home/fenics/shared
+    links:
+      - rabbit
+    depends_on:
+      - rabbit
+  flower:
+    image: mher/flower:latest 
+    working_dir: /home/fenics/shared/mini_project_celery
+    entrypoint: celery
+    command: -A proj flower
+    ports:
+      - 5555:5555
+    depends_on:
+      - rabbit
+    volumes:
+      - ..:/home/fenics/shared
