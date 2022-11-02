@@ -13,7 +13,7 @@ flavor = "ssc.small"
 private_net = "UPPMAX 2022/1-3 Internal IPv4 Network"
 floating_ip_pool_name = None
 floating_ip = None
-image_name = "wywiol-project_snapshot"
+image_name = "wywiol-snapshot"
 identifier = random.randint(1000,9999)
 
 loader = loading.get_plugin_loader('password')

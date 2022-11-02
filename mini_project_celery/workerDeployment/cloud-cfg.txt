@@ -1,4 +1,4 @@
 #cloud-config
 runcmd:
-  - sudo docker build -t workerimg:latest -w /home/fenics/shared/mini_project_celery  .
-  - sudo docker run  -td -v $(pwd):/home/fenics/shared -w /home/fenics/shared/mini_project_celery workerimg:latest
+  - sudo docker build -t workerimg:latest -w /home/ubuntu/lab3/mini_project_celery .
+  - sudo docker run  -td -v /home/ubuntu/lab3:/home/fenics/shared -w /home/fenics/shared/mini_project_celery workerimg:latest
