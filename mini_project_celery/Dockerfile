@@ -22,5 +22,7 @@ RUN sudo pip install celery
 #RUN ./runme.sh 0 30 10 200 3
 
 # Convert msh to xml
-
 #RUN ./airfoil 10 0.0001 10. 1 ../cloudnaca/msh/..xml
+# START CELERY WORKER
+ENTRYPOINT ["celery"]
+CMD ["-A","proj","worker","--loglevel=INFO", "-n","worker@%h"] 

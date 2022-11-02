@@ -2,8 +2,16 @@ from celery import Celery
 import subprocess
 import json
 # Celery configuration
-CELERY_BROKER_URL = 'amqp://rabbitmq:rabbitmq@rabbit:5672/'
+#-->Rabbit(hostname) in container 
+#CELERY_BROKER_URL = 'amqp://rabbitmq:rabbitmq@rabbit:5672/'
+
+#CELERY_BROKER_URL = 'amqp://rabbitmq:rabbitmq@130.238.28.112:5672/'
+CELERY_BROKER_URL =['amqp://rabbitmq:rabbitmq@rabbit:5672/','amqp://rabbitmq:rabbitmq@130.238.28.112:5672/','amqp://rabbitmq:rabbitmq@localhost:5672/']
+
 CELERY_RESULT_BACKEND = 'rpc://'
+
+
+
 # Initialize Celery
 app = Celery('celery', broker=CELERY_BROKER_URL, backend=CELERY_RESULT_BACKEND)
 
@@ -22,8 +30,8 @@ def startSimulation(filename,input_path):
     subprocess.run(["../murtazo/navier_stokes_solver/airfoil", "10","0.0001","10.","1", xmlfilename],check=True)
     #Task3 getResults by Tail –n 1 drag_ligt.m
     #output = !tail -n 1  ../murtazo/navier_stokes_solver/results/drag_ligt.m 
-    output =  subprocess.run(["tail", "-n","1", "../murtazo/navier_stokes_solver/results/drag_ligt.m"],check=True, stdout=subprocess.PIPE, universal_newlines=True)
-    result = {"filename": filename, "lift": output.stdout.split("\t")[1], "drag":output.stdout.split("\t")[2].slit("\n")[0]}
+    output =  subprocess.run(["tail", "-n","1", "./results/drag_ligt.m"],check=True, stdout=subprocess.PIPE, universal_newlines=True)
+    result = {"filename": filename, "lift": output.stdout.split("\t")[1], "drag":output.stdout.split("\t")[2].split("\\n")[0]}
     return json.dumps(result)
 
 if __name__ == '__main__':

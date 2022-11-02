@@ -36,3 +36,18 @@ services:
       - rabbit
     volumes:
       - ..:/home/fenics/shared
+  notebook:
+    image: jupyter/notebook:latest
+    build:
+      context: ./notebookfiles/
+      dockerfile: Dockerfile
+    working_dir: /home/fenics/shared
+    environment:
+      - NB_USER=root
+      - GRANT_SUDO=yes
+      - NotebookApp.token=fbd36189a9c780c4e79fa6ac8e45a813187b2807ed95ed41
+    ports:
+      - 8888:8888
+      - 443:443
+    volumes:
+      - ..:/home/fenics/shared
