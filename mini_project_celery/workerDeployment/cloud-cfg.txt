@@ -1,4 +1,24 @@
 #cloud-config
-runcmd:
-  - sudo docker build -t workerimg:latest -w /home/ubuntu/lab3/mini_project_celery .
-  - sudo docker run  -td -v /home/ubuntu/lab3:/home/fenics/shared -w /home/fenics/shared/mini_project_celery workerimg:latest
+
+apt_update: true
+apt_upgrade: true
+
+packages: 
+ - apt-transport-https 
+ - ca-certificates 
+ - curl 
+ - software-properties-common
+
+runcmd: 
+ - echo "adding docker repo"
+ - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+ - add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+ - apt-get update -y
+ - apt-get install -y docker-ce
+ - echo "adding docker-compose"
+ - curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-Linux-x86_64 -o /usr/local/bin/docker-compose
+ - chmod +x /usr/local/bin/docker-compose
+ 
+ 
+ - sudo docker build -t workerimg:latest -w /home/ubuntu/lab3/mini_project_celery .
+ - sudo docker run  -td -v /home/ubuntu/lab3:/home/fenics/shared -w /home/fenics/shared/mini_project_celery workerimg:latest
