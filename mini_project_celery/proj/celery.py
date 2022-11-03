@@ -3,12 +3,11 @@ import subprocess
 import json
 # Celery configuration
 #-->Rabbit(hostname) in container 
-#CELERY_BROKER_URL = 'amqp://rabbitmq:rabbitmq@rabbit:5672/'
-
-#CELERY_BROKER_URL = 'amqp://rabbitmq:rabbitmq@130.238.28.112:5672/'
 CELERY_BROKER_URL =['amqp://rabbitmq:rabbitmq@rabbit:5672/','amqp://rabbitmq:rabbitmq@130.238.28.112:5672/','amqp://rabbitmq:rabbitmq@localhost:5672/']
 
 CELERY_RESULT_BACKEND = 'rpc://'
+#Add MongoDB
+#CELERY RESULT BACKEND = ’mongodb:password//130.238.28.112:27017'
 
 
 
